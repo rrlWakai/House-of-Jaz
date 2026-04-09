@@ -3,7 +3,7 @@ import { Plus, Pencil, Trash2, X, Check, ToggleLeft, ToggleRight, Tag } from 'lu
 import { promoStore, STORE_EVENT } from '@/lib/store';
 import type { Promo } from '@/lib/types';
 import { cn } from '@/lib/utils';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 // ── Promo Form Dialog ─────────────────────────────────────────────────────────
 
@@ -91,7 +91,7 @@ function PromoFormDialog({
               {promo ? promo.code : 'Add Promo Code'}
             </h3>
           </div>
-          <button onClick={onClose} className="text-[#8A8278] hover:text-[#1A1610] transition-colors">
+          <button type="button" title="Close" onClick={onClose} className="text-[#8A8278] hover:text-[#1A1610] transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -169,18 +169,22 @@ function PromoFormDialog({
           {/* Valid from / until */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className={labelClass}>Valid From</label>
+              <label htmlFor="promo-valid-from" className={labelClass}>Valid From</label>
               <input
+                id="promo-valid-from"
                 type="date"
+                title="Valid from date"
                 value={form.validFrom}
                 onChange={e => set('validFrom', e.target.value)}
                 className={inputClass}
               />
             </div>
             <div>
-              <label className={labelClass}>Valid Until</label>
+              <label htmlFor="promo-valid-until" className={labelClass}>Valid Until</label>
               <input
+                id="promo-valid-until"
                 type="date"
+                title="Valid until date"
                 value={form.validUntil}
                 onChange={e => set('validUntil', e.target.value)}
                 className={inputClass}
@@ -227,12 +231,14 @@ function PromoFormDialog({
         {/* Footer */}
         <div className="px-6 py-4 border-t border-[#E8E0D4] flex justify-end gap-3">
           <button
+            type="button"
             onClick={onClose}
             className="px-4 py-2 text-sm text-[#8A8278] hover:text-[#1A1610] transition-colors"
           >
             Cancel
           </button>
           <button
+            type="button"
             onClick={handleSave}
             className="flex items-center gap-2 px-5 py-2 bg-[#1A1610] text-white text-[11px] tracking-[0.14em] uppercase hover:bg-[#C9A87C] transition-colors"
           >
@@ -320,6 +326,7 @@ export function PromoManager() {
           <p className="text-[#8A8278] text-sm">Create and manage promo codes for guests.</p>
         </div>
         <button
+          type="button"
           onClick={() => setDialogPromo(null)}
           className="flex items-center gap-2 px-4 py-2.5 bg-[#1A1610] text-white text-[11px] tracking-[0.14em] uppercase hover:bg-[#C9A87C] transition-colors"
         >
@@ -333,6 +340,7 @@ export function PromoManager() {
           <Tag className="w-10 h-10 text-[#E8E0D4] mx-auto mb-4" />
           <p className="text-[#8A8278] text-sm mb-4">No promo codes yet.</p>
           <button
+            type="button"
             onClick={() => setDialogPromo(null)}
             className="text-[#C9A87C] text-sm hover:underline"
           >
@@ -393,6 +401,7 @@ export function PromoManager() {
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-2 justify-end">
                         <button
+                          type="button"
                           onClick={() => toggleActive(p)}
                           title={p.isActive ? 'Deactivate' : 'Activate'}
                           className={cn(
@@ -405,12 +414,16 @@ export function PromoManager() {
                             : <ToggleLeft className="w-5 h-5" />}
                         </button>
                         <button
+                          type="button"
+                          title="Edit promo"
                           onClick={() => setDialogPromo(p)}
                           className="text-[#8A8278] hover:text-[#1A1610] transition-colors"
                         >
                           <Pencil className="w-3.5 h-3.5" />
                         </button>
                         <button
+                          type="button"
+                          title="Delete promo"
                           onClick={() => handleDelete(p.id)}
                           className="text-[#8A8278] hover:text-red-500 transition-colors"
                         >

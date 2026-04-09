@@ -400,7 +400,6 @@ export function BookingForm() {
                   </div>
                   <button
                     type="button"
-                    type="button"
                     title="Remove promo code"
                     onClick={handleRemovePromo}
                     className="text-[#8A8278] hover:text-red-500 transition-colors"
