@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -1 /c/Users/zeref/Downloads/b_a115gFZsKxR/components/*.tsx)"
+    ]
+  }
+}

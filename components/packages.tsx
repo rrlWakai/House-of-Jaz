@@ -1,38 +1,21 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { rateStore, STORE_EVENT } from "@/lib/store";
+import type { PackageRate } from "@/lib/types";
 
 export function Packages() {
-  const packages = [
-    {
-      title: "Day Escape",
-      price: "5,000",
-      unit: "per day",
-      description:
-        "A curated daytime experience for those seeking a brief retreat.",
-      features: [
-        "4-hour access",
-        "Pool & Jacuzzi",
-        "Light refreshments",
-        "Changing facilities",
-      ],
-    },
-    {
-      title: "Overnight Experience",
-      price: "8,500",
-      unit: "per night",
-      description:
-        "Our most sought-after package — a full overnight immersion in luxury.",
-      features: ["Luxury suite", "Dinner & breakfast", "Airport transfer"],
-      featured: true,
-    },
-    {
-      title: "Extended Stay",
-      price: "12,000",
-      unit: "per stay",
-      description:
-        "Three nights of unhurried luxury with every amenity at your disposal.",
-      features: ["3-night package", "Premium suite", "All meals included"],
-    },
-  ];
+  const [packages, setPackages] = useState<PackageRate[]>(() => rateStore.getAll());
+
+  // Stay in sync with admin rate changes in real-time
+  useEffect(() => {
+    const refresh = () => setPackages(rateStore.getAll());
+    window.addEventListener(STORE_EVENT, refresh);
+    window.addEventListener("storage", refresh);
+    return () => {
+      window.removeEventListener(STORE_EVENT, refresh);
+      window.removeEventListener("storage", refresh);
+    };
+  }, []);
 
   return (
     <section id="packages" className="w-full bg-[#FAF8F4] py-24 md:py-36">
@@ -58,7 +41,7 @@ export function Packages() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {packages.map((pkg, index) => (
             <motion.div
-              key={index}
+              key={pkg.id}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -100,7 +83,7 @@ export function Packages() {
                   pkg.featured ? "text-white" : "text-[#1A1610]"
                 }`}
               >
-                {pkg.title}
+                {pkg.name}
               </h3>
 
               {/* Price */}
@@ -117,7 +100,7 @@ export function Packages() {
                   from
                 </span>
                 <span className="font-serif font-normal text-[#C9A87C] text-4xl md:text-5xl leading-none">
-                  ₱{pkg.price}
+                  ₱{pkg.basePrice.toLocaleString()}
                 </span>
                 <span
                   className={`text-xs tracking-widest uppercase mt-2 block ${

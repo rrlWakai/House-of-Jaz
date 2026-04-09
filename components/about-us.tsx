@@ -1,18 +1,17 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export function AboutUs() {
   const stats = [
-    { value: '500+', label: 'Satisfied Guests' },
-    { value: '4.9★', label: 'Guest Rating' },
-    { value: '24/7', label: 'Dedicated Service' },
-    { value: '100%', label: 'Private Events' },
+    { value: "500+", label: "Satisfied Guests" },
+    { value: "4.9★", label: "Guest Rating" },
+    { value: "24/7", label: "Dedicated Service" },
+    { value: "100%", label: "Private Events" },
   ];
 
   return (
     <section id="about" className="w-full bg-[#FAF8F4] py-24 md:py-36">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
-
           {/* Left: Image */}
           <motion.div
             initial={{ opacity: 0, x: -32 }}
@@ -43,16 +42,24 @@ export function AboutUs() {
               About House of JAZ
             </p>
             <h2 className="font-serif font-normal text-[#1A1610] text-4xl md:text-5xl leading-tight mb-8">
-              Where Modern Luxury<br />Meets Tranquility
+              Where Modern Luxury
+              <br />
+              Meets Tranquility
             </h2>
 
             <div className="w-10 h-px bg-[#C9A87C] mb-8" />
 
             <p className="text-[#8A8278] text-base leading-relaxed mb-5">
-              House of JAZ is a carefully curated private resort designed for those who appreciate the finer things. Our modern architecture seamlessly blends with luxurious comfort, offering an escape from the ordinary.
+              House of JAZ is a carefully curated home rental designed for those
+              who appreciate the finer things. Our modern architecture
+              seamlessly blends with luxurious comfort, offering an escape from
+              the ordinary.
             </p>
             <p className="text-[#8A8278] text-base leading-relaxed mb-14">
-              Every detail has been thoughtfully considered — from the heated jacuzzi overlooking our pristine pool, to the meticulously furnished suites that provide the perfect sanctuary for rest and rejuvenation.
+              Every detail has been thoughtfully considered — from the heated
+              jacuzzi overlooking our pristine pool, to the meticulously
+              furnished suites that provide the perfect sanctuary for rest and
+              rejuvenation.
             </p>
 
             {/* Stats grid */}
@@ -75,7 +82,6 @@ export function AboutUs() {
               ))}
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>
