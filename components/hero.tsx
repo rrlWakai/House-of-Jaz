@@ -55,7 +55,8 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.95, ease: [0.16, 1, 0.3, 1] }}
           className="font-serif italic text-white/65 text-base md:text-lg max-w-sm mx-auto mb-12"
         >
-          Where architecture meets serenity
+          offers a guaranteed JOYOUS stay in an AESTHETIC place which will bring
+          you into ZEN
         </motion.p>
 
         {/* CTA Buttons */}
